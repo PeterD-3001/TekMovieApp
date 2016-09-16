@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+
+        <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/style.css" rel="stylesheet" type="text/css"/>
+
+        <script src="/jquery-3.1.0.min.js"></script>
+        <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <div class="container">
+                <h1>My Film App</h1>
+                <p>This is my collection of films. Joepie!</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>List of films</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Length</th>
+                    <th>Release year</th>
+                    <th>Controls</th>
+                </tr>
+
+                <tr th:each="f : ${filmList}">
+                    <td th:text="${f.title}"></td>
+                    <td th:text="${f.description}"></td>
+                    <td th:text="${f.length}"></td>
+                    <td th:text="${f.releaseYear}"></td>
+                    <td>
+                        <a th:href="@{/addfilm(filmId=${f.id})}" class="btn btn-xs btn-info">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a th:href="@{/removefilm(filmId=${f.id})}" class="btn btn-xs btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+            <a th:href="@{/addfilm}" class="btn btn-primary">Add new film</a>
+        </div>
+    </body>
+</html>
