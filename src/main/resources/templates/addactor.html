@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+
+        <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="/style.css" rel="stylesheet" type="text/css"/>
+
+        <script src="/jquery-3.1.0.min.js"></script>
+        <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Tek Movie App</h1>
+                <p>This is my collection of films. Joepie!</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Add a new actor</h1>
+            <p>On this page we add a new actor</p>
+            <form method="post" th:action="@{/addactor}" th:object="${actor}">
+                <input type="hidden" th:field="*{id}"  th:value="*{id}"/>
+
+                <div th:class="${#fields.hasErrors('name') ? 'form-group has-error' : 'form-group'}">
+                    <label for="name" class="control-label">Name</label>
+                    <input id="name" th:field="*{name}" th:value="*{name}" type="text" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="help-block"></div>
+                </div>
+
+                <div th:class="${#fields.hasErrors('nationality') ? 'form-group has-error' : 'form-group'}">
+                    <label for="nationality" class="control-label">Nationality</label>
+                    <input id="nationality" th:field="*{nationality}"  th:value="*{nationality}" type="text" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}" class="help-block"></div>
+                </div>
+
+                <div th:class="${#fields.hasErrors('yearOfBirth') ? 'form-group has-error' : 'form-group'}">
+                    <label for="yearOfBirth" class="control-label">Year Of Birth</label>
+                    <input id="yearOfBirth" th:field="*{yearOfBirth}"  th:value="*{yearOfBirth}" type="text" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('yearOfBirth')}" th:errors="*{yearOfBirth}" class="help-block"></div>
+                </div>
+                <div th:class="${#fields.hasErrors('description') ? 'form-group has-error' : 'form-group'}">
+                    <label for="description" class="control-label">Description</label>
+                    <input id="description" th:field="*{description}"  th:value="*{description}" type="text" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="help-block"></div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" th:value="${actor.id == null ? 'Add new actor' : 'Edit existing actor'}" class="btn btn-primary"/>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

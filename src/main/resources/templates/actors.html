@@ -19,33 +19,33 @@
         </div>
 
         <div class="container">
-            <h1>List of films</h1>
+            <h1>List of Actors</h1>
             <table class="table table-striped">
                 <tr>
-                    <th>Title</th>
+                    <th>Name</th>
+                    <th>Nationality</th>
+                    <th>Year Of Birth</th>
                     <th>Description</th>
-                    <th>Length</th>
-                    <th>Release year</th>
                     <th>Controls</th>
                 </tr>
 
-                <tr th:each="f : ${filmList}">
-                    <td th:text="${f.title}"></td>
+                <tr th:each="f : ${actorList}">
+                    <td th:text="${f.name}"></td>
+                    <td th:text="${f.nationality}"></td>
+                    <td th:text="${f.yearOfBirth}"></td>
                     <td th:text="${f.description}"></td>
-                    <td th:text="${f.length}"></td>
-                    <td th:text="${f.releaseYear}"></td>
                     <td>
-                        <a th:href="@{/addfilm(filmId=${f.id})}" class="btn btn-xs btn-info">
+                        <a th:href="@{/addactor(actorId=${f.id})}" class="btn btn-xs btn-info">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a th:href="@{/removefilm(filmId=${f.id})}" class="btn btn-xs btn-danger">
+                        <a th:href="@{/removeactor(actorId=${f.id})}" class="btn btn-xs btn-danger">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                     </td>
                 </tr>
 
             </table>
-            <a th:href="@{/addfilm}" class="btn btn-primary">Add new film</a>
+            <a th:href="@{/addactor}" class="btn btn-primary">Add new actor</a>
         </div>
     </body>
 </html>

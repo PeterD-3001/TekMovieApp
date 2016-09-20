@@ -10,32 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-public class MyController {
+public class FilmController {
     @Autowired
     FilmRepository fr;
 
-    @RequestMapping("/")
-    public String landing() {
-        return "redirect:/film/list";
-    }
+    /*
+    @Autowired
+    ActorRepository ar;
+    */
 
-    /**
-     * A controller that renders directly without a view
-     */
-    @RequestMapping("/direct")
-    @ResponseBody
-    String directExample() {
-        return "Hello World!";
-    }
-
-    /**
-     * A controller that uses an explicit view name
-     */
-    @RequestMapping("/bar")
-    String anyMethodName() {
-        return "foo";
-    }
-
+    /* Films hier */
     @RequestMapping("/film/list")
     public String ex(Model model) {
         model.addAttribute("filmList", fr.findAll());
@@ -44,9 +28,12 @@ public class MyController {
 
     @RequestMapping(value = "/addfilm", method = RequestMethod.GET)
     public String addFilm(Model model, @RequestParam(value = "filmId", required = false) Integer filmId) {
-        if(filmId != null) {
+        if(filmId != null)
+        {
             model.addAttribute("film", fr.findOne(filmId));
-        } else {
+        }
+        else
+        {
             model.addAttribute("film", new Film());
         }
         return "addfilm";
@@ -67,4 +54,44 @@ public class MyController {
         fr.delete(filmId);
         return "redirect:/film/list";
     }
+
+    /** ===== Actors Hier ======
+    @RequestMapping("/actor/list")
+    public String ex2(Model model)
+    {
+        // System.out.println(ar.findAll());
+        model.addAttribute("actorList", ar.findAll());
+        return "actors";
+
+    }
+
+    @RequestMapping(value = "/addactor", method = RequestMethod.GET)
+    public String addActor(Model model, @RequestParam(value = "actorId", required = false) Integer actorId) {
+        if(actorId != null)
+        {
+            model.addAttribute("actor", ar.findOne(actorId));
+        }
+        else
+        {
+            model.addAttribute("actor", new Actor());
+        }
+        return "addactor";
+    }
+
+    @RequestMapping(value = "/addactor", method = RequestMethod.POST)
+    public String processForm(@Valid Actor actor, BindingResult br) {
+        if(br.hasErrors()) {
+            return "addactor";
+        }
+        else
+        {
+            ar.save(actor);
+            return "redirect:/actor/list";
+        }
+    }
+
+    ---- **/
+
+
+
 }
