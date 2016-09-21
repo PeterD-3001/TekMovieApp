@@ -15,17 +15,10 @@ import javax.validation.Valid;
 @Controller
 public class MainController
 {
-    /*
-    @Autowired
-    FilmRepository fr;
-    @Autowired
-    ActorRepository ar;
-    */
-
     @RequestMapping("/")
     public String landing()
     {
-        return "redirect:/bar";
+        return "redirect:/landing";
     }
 
     /**
@@ -41,10 +34,10 @@ public class MainController
     /**
      * A controller that uses an explicit view name
      */
-    @RequestMapping("/bar")
+    @RequestMapping("/landing")
     String anyMethodName()
     {
-        return "bar";
+        return "index";
     }
 
 

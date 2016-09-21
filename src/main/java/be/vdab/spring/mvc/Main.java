@@ -9,3 +9,9 @@ public class Main {
         SpringApplication.run(Main.class, args);
     }
 }
+
+/*
+http://localhost:8080/landing
+http://localhost:8080/actor/list
+http://localhost:8080/film/list
+*/
