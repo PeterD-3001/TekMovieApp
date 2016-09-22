@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
 
@@ -32,18 +33,24 @@ public class ReviewController {
     }
 
     @RequestMapping(value = "/addreview", method = RequestMethod.POST)
-    public String processForm(@RequestParam(value= "filmId", required=true) Integer filmId, @Valid Review review, BindingResult br) {
+    public String processForm(@RequestParam(value= "filmId", required=true) Integer filmId, @Valid Review review, BindingResult br,Model model) {
+        Film f = fr.findOne(filmId);
         if(br.hasErrors()) {
+            model.addAttribute("film", f);
             return "addreview";
         }
         else
         {
-            Film f = fr.findOne(filmId);
+
             f.getReviewList().add(review);
             fr.save(f);
+
+            // <a th:href="@{/addfilm(filmId=${f.id})}" class="btn btn-xs btn-info">
             // String returnString = "redirect:/addreview(filmId=" + filmId.toString() +")";
             // return "redirect:/addreview(filmId=" + filmId.toString() +")";
-            return "redirect:/review/list";
+
+
+            return "redirect:" + MvcUriComponentsBuilder.fromMappingName("RC#addreview").arg(1,filmId).build();
         }
     }
 
