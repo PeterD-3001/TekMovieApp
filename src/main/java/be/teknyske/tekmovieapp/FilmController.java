@@ -1,4 +1,4 @@
-package be.vdab.spring.mvc;
+package be.teknyske.tekmovieapp;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,42 +55,6 @@ public class FilmController {
         return "redirect:/film/list";
     }
 
-    /** ===== Actors Hier ======
-    @RequestMapping("/actor/list")
-    public String ex2(Model model)
-    {
-        // System.out.println(ar.findAll());
-        model.addAttribute("actorList", ar.findAll());
-        return "actors";
-
-    }
-
-    @RequestMapping(value = "/addactor", method = RequestMethod.GET)
-    public String addActor(Model model, @RequestParam(value = "actorId", required = false) Integer actorId) {
-        if(actorId != null)
-        {
-            model.addAttribute("actor", ar.findOne(actorId));
-        }
-        else
-        {
-            model.addAttribute("actor", new Actor());
-        }
-        return "addactor";
-    }
-
-    @RequestMapping(value = "/addactor", method = RequestMethod.POST)
-    public String processForm(@Valid Actor actor, BindingResult br) {
-        if(br.hasErrors()) {
-            return "addactor";
-        }
-        else
-        {
-            ar.save(actor);
-            return "redirect:/actor/list";
-        }
-    }
-
-    ---- **/
 
 
 

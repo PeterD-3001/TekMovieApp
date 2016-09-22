@@ -14,39 +14,76 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Tek Movie App</h1>
-                <p>This is my collection of films. Joepie!</p>
+                <p>Teknyske's collection of films.</p>
+            </div>
+        </div>
+
+        <div class="navbar navbar-default">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/film/list}">Films</a></li>
+                    <li><a th:href="@{/actor/list}">Actors</a></li>
+                    <li><a th:href="@{/review/list}">Reviews</a></li>
+                </ul>
             </div>
         </div>
 
         <div class="container">
-            <h1>Add a new film</h1>
-            <p>On this page we add a new film</p>
-            <form method="post" th:action="@{/addfilm}" th:object="${film}">
-                <input type="hidden" th:field="*{id}"  th:value="*{id}"/>
+            <h1>Add a review to a film</h1>
 
-                <div th:class="${#fields.hasErrors('title') ? 'form-group has-error' : 'form-group'}">
-                    <label for="title" class="control-label">Title</label>
-                    <input id="title" th:field="*{title}" th:value="*{title}" type="text" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="help-block"></div>
+            <table class="table table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Length</th>
+                    <th>Release year</th>
+
+                </tr>
+
+                <tr >
+                    <td th:text="${film.title}"></td>
+                    <td th:text="${film.description}"></td>
+                    <td th:text="${film.length}"></td>
+                    <td th:text="${film.releaseYear}"></td>
+                </tr>
+            </table>
+
+            <h1>Existing reviews for this film...</h1>
+            <table class="table table-striped">
+                <tr>
+                    <th>Review (text)</th>
+                    <th>Rating (score)</th>
+                </tr>
+
+                <tr th:each="r : ${film.reviewList}">
+                    <td th:text="${r.reviewText}"></td>
+                    <td th:text="${r.rating}"></td>
+                </tr>
+
+            </table>
+
+            <h1>Add another review to this film...</h1>
+
+            <form method="post" th:action="@{/addreview}" th:object="${review}">
+                <input type="hidden" name="filmId" th:value="${film.id}"/>
+
+                <div th:class="${#fields.hasErrors('reviewText') ? 'form-group has-error' : 'form-group'}">
+                    <label for="reviewText" class="control-label">Review Text</label>
+                    <input id="reviewText" th:field="*{reviewText}" th:value="*{reviewText}" type="text" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('reviewText')}" th:errors="*{reviewText}" class="help-block"></div>
                 </div>
-                <div th:class="${#fields.hasErrors('description') ? 'form-group has-error' : 'form-group'}">
-                    <label for="description" class="control-label">Description</label>
-                    <input id="description" th:field="*{description}"  th:value="*{description}" type="text" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="help-block"></div>
+
+                <div th:class="${#fields.hasErrors('rating') ? 'form-group has-error' : 'form-group'}">
+                    <label for="rating" class="control-label">Review Rating</label>
+                    <input id="rating" th:field="*{rating}"  th:value="*{rating}" type="text" class="form-control"/>
+                    <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" class="help-block"></div>
+
                 </div>
-                <div th:class="${#fields.hasErrors('releaseYear') ? 'form-group has-error' : 'form-group'}">
-                    <label for="releaseYear" class="control-label">Release year</label>
-                    <input id="releaseYear" th:field="*{releaseYear}"  th:value="*{releaseYear}" type="text" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}" class="help-block"></div>
-                </div>
-                <div th:class="${#fields.hasErrors('length') ? 'form-group has-error' : 'form-group'}">
-                    <label for="length" class="control-label">Length</label>
-                    <input id="length" th:field="*{length}"  th:value="*{length}" type="text" class="form-control"/>
-                    <div th:if="${#fields.hasErrors('length')}" th:errors="*{length}" class="help-block"></div>
-                </div>
+
                 <div class="form-group">
-                    <input type="submit" th:value="${film.id == null ? 'Add new film' : 'Edit existing film'}" class="btn btn-primary"/>
+                    <input type="submit" value="Submit Review" class="btn btn-primary"/>
                 </div>
+
             </form>
         </div>
     </body>

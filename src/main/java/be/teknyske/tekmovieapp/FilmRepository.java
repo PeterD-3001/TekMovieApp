@@ -1,4 +1,4 @@
-package be.vdab.spring.mvc;
+package be.teknyske.tekmovieapp;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

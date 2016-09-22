@@ -14,13 +14,23 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Tek Movie App</h1>
-                <p>This is my collection of films. Joepie!</p>
+                <p>Teknyske's collection of films.</p>
+            </div>
+        </div>
+
+        <div class="navbar navbar-default">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/film/list}">Films</a></li>
+                    <li><a th:href="@{/actor/list}">Actors</a></li>
+                    <li><a th:href="@{/review/list}">Reviews</a></li>
+                </ul>
             </div>
         </div>
 
         <div class="container">
-            <h1>Add a new actor</h1>
-            <p>On this page we add a new actor</p>
+            <h1><span th:text="${actor.id == null ? 'Add a new actor' : 'Edit an existing actor'}"></span></h1>
+            <p>On this page you can  <span th:text="${actor.id == null ? 'add a new actor' : 'edit an existing actor'}"></span></p>
             <form method="post" th:action="@{/addactor}" th:object="${actor}">
                 <input type="hidden" th:field="*{id}"  th:value="*{id}"/>
 
@@ -47,7 +57,7 @@
                     <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="help-block"></div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" th:value="${actor.id == null ? 'Add new actor' : 'Edit existing actor'}" class="btn btn-primary"/>
+                    <input type="submit" th:value="${actor.id == null ? 'Add this actor' : 'Save modifications'}" class="btn btn-primary"/>
                 </div>
             </form>
         </div>

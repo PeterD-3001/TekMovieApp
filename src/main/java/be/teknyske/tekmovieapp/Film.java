@@ -1,12 +1,11 @@
-package be.vdab.spring.mvc;
+package be.teknyske.tekmovieapp;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Film {
@@ -26,6 +25,11 @@ public class Film {
     @Min(value = 1, message = "Length is required")
     @Max(value = 200, message = "Nobody watches movies that long!")
     private int length;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name="film_id")
+    private List<Review> reviewList = new ArrayList<Review>();
+
 
     public Film() {
     }
@@ -68,5 +72,13 @@ public class Film {
 
     public void setLength(int length) {
         this.length = length;
+    }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 }

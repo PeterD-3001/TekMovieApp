@@ -1,4 +1,4 @@
-package be.vdab.spring.mvc;
+package be.teknyske.tekmovieapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

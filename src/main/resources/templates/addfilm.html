@@ -14,13 +14,23 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Tek Movie App</h1>
-                <p>This is my collection of films. Joepie!</p>
+                <p>Teknyske's collection of films.</p>
+            </div>
+        </div>
+
+        <div class="navbar navbar-default">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/film/list}">Films</a></li>
+                    <li><a th:href="@{/actor/list}">Actors</a></li>
+                    <li><a th:href="@{/review/list}">Reviews</a></li>
+                </ul>
             </div>
         </div>
 
         <div class="container">
-            <h1>Add a new film</h1>
-            <p>On this page we add a new film</p>
+            <h1><span th:text="${film.id == null ? 'Add a new film' : 'Edit an existing film'}"></span></h1>
+            <p>On this page we <span th:text="${film.id == null ? 'add a new film' : 'edit an existing film'}"></span></p>
             <form method="post" th:action="@{/addfilm}" th:object="${film}">
                 <input type="hidden" th:field="*{id}"  th:value="*{id}"/>
 
@@ -29,23 +39,27 @@
                     <input id="title" th:field="*{title}" th:value="*{title}" type="text" class="form-control"/>
                     <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="help-block"></div>
                 </div>
+
                 <div th:class="${#fields.hasErrors('description') ? 'form-group has-error' : 'form-group'}">
                     <label for="description" class="control-label">Description</label>
                     <input id="description" th:field="*{description}"  th:value="*{description}" type="text" class="form-control"/>
                     <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="help-block"></div>
                 </div>
+
                 <div th:class="${#fields.hasErrors('releaseYear') ? 'form-group has-error' : 'form-group'}">
                     <label for="releaseYear" class="control-label">Release year</label>
                     <input id="releaseYear" th:field="*{releaseYear}"  th:value="*{releaseYear}" type="text" class="form-control"/>
                     <div th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}" class="help-block"></div>
                 </div>
+
                 <div th:class="${#fields.hasErrors('length') ? 'form-group has-error' : 'form-group'}">
                     <label for="length" class="control-label">Length</label>
                     <input id="length" th:field="*{length}"  th:value="*{length}" type="text" class="form-control"/>
                     <div th:if="${#fields.hasErrors('length')}" th:errors="*{length}" class="help-block"></div>
                 </div>
+
                 <div class="form-group">
-                    <input type="submit" th:value="${film.id == null ? 'Add new film' : 'Edit existing film'}" class="btn btn-primary"/>
+                    <input type="submit" th:value="${film.id == null ? 'Add this film' : 'Save modifications'}" class="btn btn-primary"/>
                 </div>
             </form>
         </div>
