@@ -49,8 +49,8 @@ public class ReviewController {
             // String returnString = "redirect:/addreview(filmId=" + filmId.toString() +")";
             // return "redirect:/addreview(filmId=" + filmId.toString() +")";
 
-
-            return "redirect:" + MvcUriComponentsBuilder.fromMappingName("RC#addreview").arg(1,filmId).build();
+            return "redirect:/review/list";
+            // return "redirect:" + MvcUriComponentsBuilder.fromMappingName("RC#addreview").arg(1,filmId).build();
         }
     }
 
